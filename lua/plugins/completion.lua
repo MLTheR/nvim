@@ -28,7 +28,6 @@ return {
         },
 
         mapping = cmp.mapping.preset.insert({
-          -- Snippets krijgen voorrang op Tab
           ["<Tab>"] = cmp.mapping(function(fallback)
             if luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
@@ -52,7 +51,6 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
 
-        -- Snippets wat hoger in de lijst
         sources = cmp.config.sources({
           { name = "luasnip", priority = 1000 },
           { name = "nvim_lsp", priority = 500 },

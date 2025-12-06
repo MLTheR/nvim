@@ -9,9 +9,9 @@ vim.lsp.enable("lua_ls")
 
 -- clangd
 local clangd = require("config.lsp.clangd")
-clangd.on_attach = functions.on_attach
-clangd.capabilities = functions.capabilities
 
-vim.lsp.config.cland = clangd
-vim.lsp.enable("clangd")
+clangd.capabilities = clangd.capabilities
 
+local old_on_attach = clangd.on_attach
+
+vim.lsp.config.clangd = clangd

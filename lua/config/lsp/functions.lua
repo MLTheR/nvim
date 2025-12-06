@@ -9,15 +9,26 @@ f.on_attach = function(client, bufnr)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
     --diagnostics
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-    vim.keymap.del("n", "do")
-    vim.keymap.set("n", "do", function()
-        vim.diagnostic.open_float()
-    end, { noremap = true, silent = true })
+    vim.keymap.set("n", "]d", function()
+        vim.diagnostic.goto_next({ float = true })
+    end, opts)
 
+    vim.keymap.set("n", "[d", function()
+        vim.diagnostic.goto_prev({ float = true })
+    end, opts)
+
+    local function open_diagnostic_float()
+        pcall(vim.diagnostic.open_float, nil, {
+            focusable = false,
+            border = "rounded",
+            scope = "cursor",
+        })
+    end
+
+    vim.keymap.set("n", "<leader>do", open_diagnostic_float, { desc = "diagnostics in float" })
 end
 
 f.capabilities = require("cmp_nvim_lsp").default_capabilities()
+f.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 return f
