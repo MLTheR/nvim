@@ -7,11 +7,3 @@ lua_ls.capabilities = functions.capabilities
 vim.lsp.config.lua_ls = lua_ls
 vim.lsp.enable("lua_ls")
 
--- clangd
-local clangd = require("config.lsp.clangd")
-
-clangd.capabilities = clangd.capabilities
-
-local old_on_attach = clangd.on_attach
-
-vim.lsp.config.clangd = clangd
