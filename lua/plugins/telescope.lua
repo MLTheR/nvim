@@ -29,6 +29,10 @@ return {
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find grep" })
 			vim.keymap.set("n", "<leader>cm", builtin.commands, { desc = "Find commands" })
 
+			vim.keymap.set("n", "<C-f>", function()
+				require("telescope.builtin").current_buffer_fuzzy_find()
+			end, { desc = "VSCode-like search" })
+
 			vim.keymap.set({ "n", "v" }, "<leader>ca", function()
 				vim.lsp.buf.code_action()
 			end, { desc = "LSP Code Actions" })
